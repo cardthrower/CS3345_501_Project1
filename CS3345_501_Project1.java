@@ -71,6 +71,7 @@ public class CS3345_501_Project1 {
 				}
 				break;
 			case "reverseorder":
+				//create reverseorder array
 				int k =0;
 				for (int i= list.length-1; i >=0; i--, k++)
 				{
@@ -82,21 +83,31 @@ public class CS3345_501_Project1 {
 				}
 				break;
 			case "almostorder":
+				//create almostorder array
 				int inorderLength = (int) (listSize*.8);
+				int randLength = (listSize - inorderLength)/2;
 				int i=0;
-				while (i < inorderLength)
+				while (i < randLength)
 				{
-					list[i] = i;
+					list[i] = (int) (Math.random() * listSize);
 					i++;
 				}
-				for (int j=inorderLength; j < listSize; j++)
+				for (int j=randLength; j < (inorderLength+randLength); j++)
 				{
-					list[j] = (int) (Math.random() * listSize);
+					list[j] = j;
+					
 				}
-				for (int l =0; l < listInteger.length; l++)
+				for (int l = (inorderLength+randLength); l < listSize; l++)
 				{
-					listInteger[l] = list[l];
+					list[l] = (int) (Math.random() * listSize);
 				}
+				
+				for (int q =0; q < listInteger.length; q++)
+				{
+					listInteger[q] = list[q];
+				}
+				
+				
 				break;
 			default:
 				break;
@@ -108,8 +119,8 @@ public class CS3345_501_Project1 {
 				list2[i] = list[i];
 			}
 			
-			//output test for listtype
-			/**for (int i=0;i < list.length; i++)//don't forget how we switched the test output when testing quicksort
+			/**output test for listtype
+			for (int i=0;i < list.length; i++)//don't forget how we switched the test output when testing quicksort
 			{
 					System.out.println(list2[i]);
 			}*/
@@ -168,8 +179,8 @@ public class CS3345_501_Project1 {
 				
 				
 				}
-				System.out.println(sortType);
-				/**if (sortType.equals("heap")) {
+				/**System.out.println(sortType);
+				if (sortType.equals("heap")) {
 					for (int i=0;i < listInteger.length; i++)//don't forget how we switched the test output when testing quicksort
 					{
 							System.out.println(listInteger[i]);
@@ -214,12 +225,26 @@ public class CS3345_501_Project1 {
 					algosUsed.add(sortType);
 				}
 				System.out.println("The algorithms already used are: " + algosUsed.toString());
-				System.out.println("Exit to list creation by pressing 0, enter 1 to select another sort.");
-				x = Integer.parseInt(userInput.readLine());
+				System.out.println("Exit to list creation by pressing 0, enter anything else to select another sort.");
+				try {
+					x = Integer.parseInt(userInput.readLine());
+				}
+				catch(Exception IOException)
+				{
+					continue;
+				}
 			}
-			System.out.println("Exit the program by entering 0, enter 1 to continue to list creation.");
-			exitProgram = Integer.parseInt(userInput.readLine()); 
-			//System.out.print(Arrays.toString(list)); This does not work. There seems to be a hardcap to the elements that can be printed at approximately 5531 elements.
+			algosUsed.removeAll(algosUsed);
+			winningAlgo = "nothing";
+			System.out.println("Exit the program by entering 0, enter anything else to enter list creation.");
+			try {
+				exitProgram = Integer.parseInt(userInput.readLine()); 
+			}
+			catch(Exception IOException)
+			{
+				continue;
+			}
+				//System.out.print(Arrays.toString(list)); This does not work. There seems to be a hardcap to the elements that can be printed at approximately 5531 elements.
 	
 		}
 	}
